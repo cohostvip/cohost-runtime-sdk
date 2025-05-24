@@ -2,7 +2,8 @@
   "name": "cohost-runtime-sdk",
   "version": "1.0.0",
   "scripts": {
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "test": "echo \"No tests specified\" && exit 0"
   },
   "keywords": [],
   "author": "",

@@ -1,0 +1,32 @@
+name: Validate Monorepo
+
+on:
+  pull_request:
+    paths:
+      - '**/*.ts'
+      - '**/*.tsx'
+      - '**/package.json'
+      - '**/tsconfig.json'
+      - 'pnpm-lock.yaml'
+      - '.github/workflows/validate-monorepo.yml'
+
+jobs:
+  validate:
+    name: Lint & Test Monorepo
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node & PNPM
+        uses: ./.github/actions/setup-node-pnpm
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Lint all packages
+        run: pnpm -r run lint
+
+      - name: Test all packages
+        run: pnpm -r run test

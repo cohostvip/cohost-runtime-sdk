@@ -4,8 +4,8 @@ on:
   push:
     branches: [main]
     paths:
-      - 'packages/runtime-types/**'
-      - '.github/workflows/publish-runtime-types.yml'
+      - "packages/runtime-types/**"
+      - ".github/workflows/publish-runtime-types.yml"
 
 jobs:
   publish:
@@ -21,31 +21,17 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Use Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          registry-url: https://registry.npmjs.org/
-
-      - uses: pnpm/action-setup@v4
-        with:
-          version: 10.11.0
-
-      - name: Enable pnpm via corepack
-        run: corepack enable
-
-
-      - name: Install dependencies
-        run: pnpm install
+      - name: Setup Node & PNPM
+        uses: ./.github/actions/setup-node-pnpm
 
       - name: Lint
-        run: pnpm run lint
+        run: pnpm -w run lint
 
       - name: Run tests
-        run: pnpm run test
+        run: pnpm -w run test
 
       - name: Build
-        run: pnpm run build
+        run: pnpm build
 
       - name: Publish to npm
         run: pnpm publish --access public
