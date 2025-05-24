@@ -9,7 +9,7 @@ on:
 
 jobs:
   publish:
-    if: github.repository == '@cohostvip/cohost-runtime-sdk'
+    if: github.repository == 'cohostvip/cohost-runtime-sdk'
     name: Lint, Test, and Publish
     runs-on: ubuntu-latest
     defaults:
