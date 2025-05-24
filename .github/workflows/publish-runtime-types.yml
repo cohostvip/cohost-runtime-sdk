@@ -26,7 +26,6 @@ jobs:
         with:
           node-version: 22
           registry-url: https://registry.npmjs.org/
-          cache: 'pnpm'
 
       - uses: pnpm/action-setup@v4
         with:
@@ -35,7 +34,7 @@ jobs:
       - name: Enable pnpm via corepack
         run: corepack enable
 
-        
+
       - name: Install dependencies
         run: pnpm install
 
