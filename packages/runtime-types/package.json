@@ -1,0 +1,19 @@
+{
+  "name": "@cohostvip/runtime-types",
+  "version": "1.0.0",
+  "description": "Shared runtime type definitions for Cohost apps and runtime engine",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsup"
+  },
+  "license": "MIT"
+}

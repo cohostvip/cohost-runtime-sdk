@@ -1,0 +1,49 @@
+name: Publish @cohostvip/runtime-types
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'packages/runtime-types/**'
+      - '.github/workflows/publish-runtime-types.yml'
+
+jobs:
+  publish:
+    name: Lint, Test, and Publish
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: packages/runtime-types
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          registry-url: https://registry.npmjs.org/
+          cache: 'pnpm'
+
+      - name: Install pnpm
+        run: npm install -g pnpm
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Lint
+        run: pnpm run lint
+
+      - name: Run tests
+        run: pnpm run test
+
+      - name: Build
+        run: pnpm run build
+
+      - name: Publish to npm
+        run: pnpm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
